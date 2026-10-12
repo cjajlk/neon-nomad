@@ -15,3 +15,8 @@ Le record est sauvegardé localement dans le navigateur.
 Le jeu fonctionne sans compte ChatGPT, sans serveur applicatif et sans clé API.
 Les polices Google sont facultatives : des polices de remplacement fonctionnent hors ligne.
 Les dessins du renard, des papillons et de la forêt sont inclus.
+
+Nouvelle version : écran d’accueil illustré, menu, refuge des renards et défis quotidiens.
+La monnaie Éclats se gagne en guidant les lucioles, en terminant les clairières et en récupérant les récompenses des défis.
+Consulter README.md pour les règles de progression et la préparation de futurs personnages.
+Conserver le dossier assets/ à côté de index.html : il contient l’image d’accueil.
