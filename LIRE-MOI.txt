@@ -1,0 +1,17 @@
+LUMI — La forêt des lucioles
+
+Installation : extraire ce ZIP dans le dossier du jeu sur votre hébergement.
+Le fichier index.html est directement à la racine : aucun build ni installation nécessaire.
+
+Intégration dans une page :
+<iframe src="/jeux/lumi/index.html" title="Lumi — La forêt des lucioles" style="width:100%;height:900px;border:0" allow="autoplay"></iframe>
+Adaptez le chemin et la hauteur à votre site. Cliquez dans le jeu pour activer le clavier.
+
+Commandes : flèches, ZQSD ou WASD ; Espace pour le bond ; P pour la pause.
+Mobile/tablette : glissement sur le jeu ou boutons tactiles.
+Son : activable avec le bouton SON ON ; les sons sont synthétisés dans le navigateur.
+Le record est sauvegardé localement dans le navigateur.
+
+Le jeu fonctionne sans compte ChatGPT, sans serveur applicatif et sans clé API.
+Les polices Google sont facultatives : des polices de remplacement fonctionnent hors ligne.
+Les dessins du renard, des papillons et de la forêt sont inclus.
