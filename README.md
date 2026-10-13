@@ -36,6 +36,16 @@ Les commandes ont été testées avec des données de manettes simulées et l'in
 
 ## Tests
 
+## Plein écran
+
+Le bouton ⛶ dans l'en-tête ou au-dessus de la partie active le plein écran sur une action explicite du joueur. Le bouton SORTIR ou Échap sur PC permet d'en sortir. Le labyrinthe conserve ses proportions et adapte sa taille à la hauteur et à la largeur disponibles. Sur un écran paysage de faible hauteur, le pad se place à droite.
+
+Si le navigateur refuse ou ne propose pas l'API, le mode agrandi reste disponible avec un message explicatif. Les dialogs et réglages restent accessibles. Une iframe doit autoriser le plein écran (`allowfullscreen` / `allow="fullscreen"`) ; le Hub ouvre actuellement Lumi dans un nouvel onglet.
+
+Référence : [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API). Vérification dans le navigateur sur PC et dimensions mobiles portrait/paysage ; test matériel Chrome Android à réaliser sur le téléphone.
+
+## Exécuter les tests
+
 Avec Node.js : `node --test tests/*.cjs`. Aucun paquet à installer. Héberger avec un serveur statique pour une sauvegarde stable ; les polices Google sont facultatives.
 
 ## Image d'accueil
