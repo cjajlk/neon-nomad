@@ -20,7 +20,21 @@ Pour ajouter de futurs personnages, étendre le catalogue dans `progression.js` 
 
 Flèches, ZQSD ou WASD ; Espace : bond ; P/Échap : pause. Sur mobile/tablette : glissement ou pad. Son activable au menu ; synthèse audio dans le navigateur, sans fichiers audio externes.
 
-## Vérification
+## Manettes Bluetooth et USB
+
+Le bouton **MANETTE** ouvre les réglages. Sur Android, appairer la manette dans les réglages Bluetooth, ouvrir Lumi dans Chrome et appuyer sur un bouton. Les modèles normalisés par le navigateur utilisent la croix ou le stick gauche, le bouton du bas pour valider ou effectuer un bond, le bouton de droite pour revenir et Start/Options/Menu pour la pause.
+
+La DualSense utilise ✕, ○ et Options dans ce mode. Les manettes Xbox, PlayStation, Switch et génériques peuvent fonctionner lorsque le navigateur les expose ; les noms imprimés sur les boutons peuvent varier. **Configurer ma manette** permet d'assigner sept commandes à une croix, un stick ou des boutons et mémorise le réglage pour ce modèle. Garder le stick au repos en lançant la configuration. Utiliser FERMER au tactile pour annuler.
+
+La partie se met en pause à la déconnexion ou à la perte de focus. Un bouton maintenu lors d'une connexion ne lance pas automatiquement une action. Le tactile et le clavier restent utilisables.
+
+Le Hub V2-test ouvre actuellement Lumi dans un nouvel onglet : aucune modification de son lecteur n'est nécessaire. Pour une intégration future dans une iframe provenant d'une autre origine, déléguer la fonctionnalité avec `allow="gamepad"` et une politique compatible sur le site parent. L'accès doit être autorisé par le navigateur et se fait sur HTTPS (ou localhost pour le développement).
+
+Références : [Gamepad API](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API), [Permissions Policy gamepad](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy/gamepad).
+
+Les commandes ont été testées avec des données de manettes simulées et l'interface a été vérifiée dans le navigateur. Une validation matérielle sur DualSense et Chrome Android reste à faire.
+
+## Tests
 
 Avec Node.js : `node --test tests/*.cjs`. Aucun paquet à installer. Héberger avec un serveur statique pour une sauvegarde stable ; les polices Google sont facultatives.
 
