@@ -38,6 +38,10 @@ Les commandes ont été testées avec des données de manettes simulées et l'in
 
 ## Plein écran
 
+Sur mobile, la partie tient également dans l'écran **sans activer le plein écran**. La page est immobilisée seulement pendant le gameplay, avec ajustement à la hauteur visible du navigateur et aux zones de sécurité. Le retour au menu rétablit le défilement. En paysage, le pad se place à droite.
+
+Tactile : glissements courts pour changer de direction, maintien d'une flèche, glissement d'une flèche à l'autre et appui immédiat sur BOND. Les gestes sont capturés sur le jeu pour éviter le déplacement ou le zoom de la page ; un deuxième doigt peut actionner le bond. Les réglages ouverts peuvent toujours défiler. Les pressions actives sont libérées à l'annulation du geste et à la perte de focus.
+
 Le bouton ⛶ dans l'en-tête ou au-dessus de la partie active le plein écran sur une action explicite du joueur. Le bouton SORTIR ou Échap sur PC permet d'en sortir. Le labyrinthe conserve ses proportions et adapte sa taille à la hauteur et à la largeur disponibles. Sur un écran paysage de faible hauteur, le pad se place à droite.
 
 Si le navigateur refuse ou ne propose pas l'API, le mode agrandi reste disponible avec un message explicatif. Les dialogs et réglages restent accessibles. Une iframe doit autoriser le plein écran (`allowfullscreen` / `allow="fullscreen"`) ; le Hub ouvre actuellement Lumi dans un nouvel onglet.

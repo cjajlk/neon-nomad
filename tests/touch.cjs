@@ -1,0 +1,3 @@
+const test=require('node:test'),assert=require('node:assert/strict'),Swipe=require('../touch-controls.js');
+test('short gestures ignore jitter and detect early turns',()=>{const s=new Swipe();s.start(1,100,100);assert.equal(s.move(1,105,103),null);assert.equal(s.move(1,110,101),'right');assert.equal(s.move(1,110,112),'down');assert.equal(s.move(1,99,112),'left')});
+test('second finger cannot steal a swipe; cancellation releases it',()=>{const s=new Swipe();assert.equal(s.start(1,0,0),true);assert.equal(s.start(2,10,10),false);assert.equal(s.move(2,100,100),null);s.end(2);assert.equal(s.move(1,0,-10),'up');s.end(1);assert.equal(s.start(2,10,10),true)});
