@@ -1,0 +1,37 @@
+/* Mobile HUD reserves its own rail; no control covers a maze cell. */
+body.lumi-fit[data-view="game"] .game-view[data-layout="landscape"][data-device="mobile"]{grid-template-rows:minmax(130px,1fr) 146px 32px;grid-template-areas:'hud board' 'toolbar board' 'hint board'}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] .scoreboard{padding:8px 5px;gap:10px;align-self:start}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] .scoreboard strong{font-size:17px}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] .game-heading{display:grid;grid-template-columns:1fr;grid-template-rows:22px 36px 36px 36px;gap:4px;padding:0 4px}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #run-wallet{grid-area:1/1;padding:0;font-size:8px;align-self:center}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #pause{grid-area:2/1;width:100%;font-size:14px}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #pause:after{content:' PAUSE';font-size:9px}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] .game-heading .fullscreen-button{grid-area:3/1}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #game-menu{grid-area:4/1;font-size:10px}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] .game-heading button{min-height:36px;padding:5px!important}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] .mobile-touch-hint{padding:0 4px;font-size:8px;line-height:1.6}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #overlay{padding:10px;gap:7px;overflow:auto}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #overlay .mascot{width:62px;height:62px;object-fit:contain;margin:0}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #overlay h2{font-size:25px;line-height:1.05;margin:0}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #overlay p{font-size:11px;margin:0;max-width:340px}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #overlay button{min-height:34px;padding:9px 16px;margin:0;font-size:10px}
+body.lumi-fit[data-view="game"] .game-view[data-device="mobile"] #overlay>small{display:none}
+#rotation-screen[hidden]{display:none!important}
+#rotation-screen{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center;color:#f1f6de;font-family:system-ui,sans-serif;background:radial-gradient(ellipse at 50% 43%,#24564a 0,#102c37 43%,#071722 90%);padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);touch-action:none}
+body.rotation-required #app{visibility:hidden}
+.rotation-content{position:relative;z-index:2;width:100%;padding:24px}
+.rotation-brand{font-size:14px;letter-spacing:8px;color:#dbffa8}
+.rotation-eyebrow{margin-top:10px;font-size:9px;letter-spacing:3px;color:#96cdb1}
+.rotation-fox{width:min(68vw,280px);height:min(34dvh,290px);object-fit:contain;filter:drop-shadow(0 12px 34px #bfff6b35);margin:10px auto 0;display:block;animation:rotation-float 5s ease-in-out infinite}
+.rotation-phone{width:38px;height:67px;border:2px solid #d9ffbc;border-radius:9px;margin:14px auto 26px;position:relative;animation:rotation-turn 4s ease-in-out infinite;box-shadow:0 0 22px #ccff8933}
+.rotation-phone:after{content:'';position:absolute;bottom:5px;left:14px;width:6px;height:3px;border-radius:4px;background:#caff9f}
+#rotation-title{font-size:clamp(23px,7.4vw,29px);font-weight:650;letter-spacing:-1px;margin:0 0 12px}
+#rotation-screen p{color:#bbd3ca;font-size:14px;line-height:1.7;margin:0}
+.rotation-foot{margin-top:35px;font-size:9px;letter-spacing:2px;color:#8dab9c}
+.rotation-firefly{position:absolute;width:4px;height:7px;border-radius:50%;background:#d9ff8e;box-shadow:0 0 13px 5px #caff6633;animation:rotation-float 4s ease-in-out infinite alternate}
+.rotation-firefly:before,.rotation-firefly:after{content:'';position:absolute;width:7px;height:3px;background:#d7fff4aa;border-radius:50%;top:0;left:-6px;transform:rotate(35deg)}
+.rotation-firefly:after{left:3px;transform:rotate(-35deg)}
+#rotation-screen:after{content:'';position:absolute;width:140vw;height:45vh;border-radius:50%;background:#062522;bottom:-28vh;box-shadow:0 -30px 90px #235d4444}
+@keyframes rotation-float{50%{transform:translateY(-12px)}}
+@keyframes rotation-turn{0%,20%{transform:rotate(0)}50%,80%{transform:rotate(90deg)}100%{transform:rotate(0)}}
+@media(prefers-reduced-motion:reduce){#rotation-screen *{animation:none!important}}

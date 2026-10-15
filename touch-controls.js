@@ -9,7 +9,7 @@ LumiSwipe.DoubleTap=LumiDoubleTap;
 if(typeof module!=='undefined')module.exports=LumiSwipe;
 else (()=>{
  const swipe=new LumiSwipe(),taps=new LumiDoubleTap(),pad=document.querySelector('.touchpad'),held=new Map();let previous=0;
- const playing=()=>currentView==='game'&&state==='playing'&&!document.querySelector('#controller-dialog').open;
+ const playing=()=>currentView==='game'&&state==='playing'&&!orientationBlocked()&&!document.querySelector('#controller-dialog').open;
  canvas.addEventListener('pointerdown',e=>{if(!playing()||!swipe.start(e.pointerId,e.clientX,e.clientY))return;e.preventDefault();canvas.setPointerCapture(e.pointerId)});
  canvas.addEventListener('pointermove',e=>{if(!playing())return;const d=swipe.move(e.pointerId,e.clientX,e.clientY);if(d){taps.clear();e.preventDefault();move(d)}});
  canvas.addEventListener('pointerup',e=>{const p=swipe.pointer;if(p?.id===e.pointerId&&!p.moved&&playing()&&taps.tap(e.timeStamp,e.clientX,e.clientY)){e.preventDefault();dash()}swipe.end(e.pointerId)});
@@ -19,7 +19,7 @@ else (()=>{
  function paint(){pad.querySelectorAll('[data-dir]').forEach(b=>b.classList.toggle('touch-active',[...held.values()].includes(b.dataset.dir)))}
  for(const event of ['pointerup','pointercancel','lostpointercapture'])pad.addEventListener(event,e=>{held.delete(e.pointerId);paint()});
  function reset(){held.clear();swipe.pointer=null;taps.clear();paint()}
- window.LumiTouchControls={tick(now){if(!playing()){reset();return}if(now-previous>=90){previous=now;const d=[...held.values()].filter(Boolean).at(-1);if(d)move(d)}}};
+ window.LumiTouchControls={reset,tick(now){if(!playing()){reset();return}if(now-previous>=90){previous=now;const d=[...held.values()].filter(Boolean).at(-1);if(d)move(d)}}};
  const bond=document.querySelector('#dash');bond.addEventListener('pointerdown',e=>{if(!playing())return;e.preventDefault();dash()});bond.onclick=e=>{if(e.detail===0)dash()};
  window.addEventListener('blur',reset);document.addEventListener('visibilitychange',reset);
  // Stop document panning only inside the active game. Dialogs and menus can still scroll.

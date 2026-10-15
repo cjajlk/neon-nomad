@@ -1,0 +1,3 @@
+const test=require('node:test'),assert=require('node:assert/strict'),Layout=require('../viewport-layout.js');
+for(const [w,h,mobile] of [[844,390,true],[915,412,true],[390,844,true],[412,915,true],[1280,720,false]])test(`maximum undistorted board for ${w}x${h}`,()=>{const l=Layout.calculate(w,h,{mobile});assert.ok(l.boardWidth<=l.availableWidth+1e-8);assert.ok(l.boardHeight<=l.availableHeight+1e-8);assert.ok(Math.abs(l.boardWidth/l.boardHeight-630/690)<1e-10);assert.ok(Math.abs(l.boardWidth-l.availableWidth)<1e-8||Math.abs(l.boardHeight-l.availableHeight)<1e-8);if(l.landscape)assert.ok(Math.abs(l.boardHeight-(h-l.header))<1e-8)});
+
