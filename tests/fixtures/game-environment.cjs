@@ -1,0 +1,10 @@
+const vm=require('node:vm'),fs=require('node:fs');
+function setup(mobile=true,seed=1,{mode='classic',companion='lumi',storage=new Map()}={}){
+ const nodes=new Map(),context2d=new Proxy({},{get:(_,key)=>key.startsWith('create')?()=>({addColorStop(){}}):()=>{}}),events=new Map();let randomSeed=seed;
+ const node=k=>{if(!nodes.has(k))nodes.set(k,{width:630,height:690,dataset:{},textContent:'',hidden:true,style:{setProperty(){}},classList:{toggle(){}},innerHTML:'',disabled:false,open:false,listeners:new Map(),addEventListener(type,fn){this.listeners.set(type,fn)},querySelector:q=>node(k+' '+q),querySelectorAll:()=>[],getBoundingClientRect:()=>({left:0,top:0,width:88,height:88}),setPointerCapture(){},setAttribute(){},getContext:()=>context2d});return nodes.get(k)};
+ const math=Object.create(Math);math.random=()=>{randomSeed=(randomSeed*1664525+1013904223)>>>0;return randomSeed/4294967296};
+ const sandbox={console,Math:math,Date,Event:class{constructor(type){this.type=type}},setTimeout(){},document:{body:{classList:{add(){}}},querySelector:node,querySelectorAll:()=>[],addEventListener(){}},localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,String(v))},requestAnimationFrame(){},renderWallet(){},toast(){},currentView:'game',blocked:false,LumiMobileSession:{isMobile:()=>mobile,isBlocked:()=>sandbox.blocked},window:{addEventListener:(name,fn)=>events.set(name,fn),dispatchEvent:e=>events.get(e.type)?.()}};
+ vm.createContext(sandbox);for(const file of ['level-one-mobile.js','progression.js','companion-powers.js','game.js'])vm.runInContext(fs.readFileSync(file,'utf8'),sandbox);
+ const run=code=>vm.runInContext(code,sandbox);run('globalThis.LumiModes=window.LumiModes');sandbox.LumiModes.choose(mode);if(companion!=='lumi')run("{const c=Progression.catalog.find(c=>c.id==="+JSON.stringify(companion)+");Progression.bonus(c.price);Progression.select(c.id)}");run('start()');return {run,sandbox,storage,emit:(selector,type,event)=>node(selector).listeners.get(type)?.({pointerId:1,preventDefault(){},...event})};
+}
+module.exports={setup};

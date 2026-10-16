@@ -11,10 +11,23 @@ Accueil illustré → menu → partie. Le menu contient le refuge des renards, l
 - 10 lucioles : 1 Éclat. Le reste est conservé entre les parties.
 - Clairière terminée : 25 Éclats bonus.
 - Trois défis quotidiens : lucioles, bonds et fleurs de lune. Récompenses de 30, 20 et 25 Éclats, à récupérer une seule fois par jour.
-- Lumi est disponible dès le départ. Aurore coûte 150 Éclats, Brume 300. Variantes cosmétiques avec les mêmes capacités.
+- Lumi est disponible dès le départ. Aurore coûte 150 Éclats, Brume 300, Sylve 650, Nyx 1 200 et Astre 2 400. Les pouvoirs des compagnons sont actifs en Aventure ; Classique conserve les mêmes règles pour tous.
 - Sauvegarde locale dans `lumi-progress-v1`. Le record précédent `lumi-best` est conservé. Renouvellement des missions à minuit selon l'heure de l'appareil. Sans accès au stockage, l'interface avertit que la sauvegarde n'est valable que pour la session.
 
 Pour ajouter de futurs personnages, étendre le catalogue dans `progression.js` et leur dessin dans `game.js`. Un compte et une sauvegarde serveur seront nécessaires pour partager une progression entre appareils.
+
+## Classique et Aventure
+
+Le mode se choisit au menu avant JOUER. Classique est le choix initial afin de préserver les règles et le record existants. Aventure active un seul pouvoir, celui du compagnon sélectionné. Le choix est conservé pour les prochaines parties ; une partie commencée garde son mode et son compagnon jusqu'à sa fin.
+
+- Lumi — Second souffle : après une vie perdue, le premier bond réussi reste immédiatement disponible.
+- Aurore — Fleur enchantée : protection des fleurs prolongée de 20 %.
+- Brume — Pas léger : recharge du bond réduite de 28 à 24 pas de simulation.
+- Sylve — Sentier lumineux : indication périodique du chemin vers la luciole normale la plus proche lorsqu'il en reste au maximum 10.
+- Nyx — Voile lunaire : pendant 20 pas après une fleur, les papillons avancent deux fois moins souvent.
+- Astre — Étoile gardienne : une collision mortelle absorbée par partie, suivie de 8 pas de protection. La protection ne se renouvelle pas à un nouveau niveau ou à la reprise d'une pause.
+
+Le record historique reste dans `lumi-best` (Classique). Aventure utilise `lumi-best-adventure-v1`, et le choix du mode `lumi-mode-v1`. Les Éclats, achats et défis continuent d'utiliser `lumi-progress-v1`, sans changement des récompenses. Les timers des bonus sont suspendus avec la simulation, notamment en portrait mobile. Voir [COMPANION-POWERS.md](COMPANION-POWERS.md).
 
 ## Commandes
 

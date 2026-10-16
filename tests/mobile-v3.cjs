@@ -1,13 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs'),crypto=require('node:crypto');
 const Board=require('../level-one-mobile.js'),Gate=require('../mobile-orientation.js'),Layout=require('../viewport-layout.js');
-function setup(mobile=true,seed=1){
- const nodes=new Map(),context2d=new Proxy({},{get:(_,key)=>key.startsWith('create')?()=>({addColorStop(){}}):()=>{}}),events=new Map();let randomSeed=seed;
- const node=k=>{if(!nodes.has(k))nodes.set(k,{width:630,height:690,dataset:{},textContent:'',hidden:true,style:{setProperty(){}},classList:{toggle(){}},innerHTML:'',disabled:false,open:false,listeners:new Map(),addEventListener(type,fn){this.listeners.set(type,fn)},querySelector:q=>node(k+' '+q),querySelectorAll:()=>[],getBoundingClientRect:()=>({left:0,top:0,width:88,height:88}),setPointerCapture(){},setAttribute(){},getContext:()=>context2d});return nodes.get(k)};
- const math=Object.create(Math);math.random=()=>{randomSeed=(randomSeed*1664525+1013904223)>>>0;return randomSeed/4294967296};
- const sandbox={console,Math:math,Date,Event:class{constructor(type){this.type=type}},setTimeout(){},document:{body:{classList:{add(){}}},querySelector:node,querySelectorAll:()=>[],addEventListener(){}},localStorage:{getItem:()=>null,setItem(){}},requestAnimationFrame(){},renderWallet(){},toast(){},currentView:'game',blocked:false,LumiMobileSession:{isMobile:()=>mobile,isBlocked:()=>sandbox.blocked},window:{addEventListener:(name,fn)=>events.set(name,fn),dispatchEvent:e=>events.get(e.type)?.()}};
- vm.createContext(sandbox);for(const file of ['level-one-mobile.js','progression.js','game.js'])vm.runInContext(fs.readFileSync(file,'utf8'),sandbox);
- const run=code=>vm.runInContext(code,sandbox);run('start()');return {run,sandbox,emit:(selector,type,event)=>node(selector).listeners.get(type)?.({pointerId:1,preventDefault(){},...event})};
-}
+const {setup}=require('./fixtures/game-environment.cjs');
+
 test('mobile level 1 repeats deterministically; all 295 paths and 248 pickups reachable',()=>{
  const first=Board.create();for(let n=0;n<20;n++)assert.deepEqual(Board.create(),first);
  const seen=new Set(),queue=[first.player];for(let i=0;i<queue.length;i++){const {x,y}=queue[i],k=x+','+y;if(seen.has(k))continue;seen.add(k);for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]])if(first.map[y+dy]?.[x+dx]&&first.map[y+dy][x+dx]!=='#')queue.push({x:x+dx,y:y+dy})}

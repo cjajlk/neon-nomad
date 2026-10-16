@@ -1,0 +1,15 @@
+/* Premium cosmetics: rarity is always written as well as shown through color. */
+.rarity-badge{display:inline-flex;align-items:center;justify-content:center;min-height:25px;padding:4px 12px;border-radius:99px;border:1px solid #aec6b433;color:#aec6b4;font:9px 'Space Mono',monospace;letter-spacing:1.3px;text-transform:uppercase}
+.character-card.rarity-rare{background:radial-gradient(ellipse at 50% 20%,#49774a44,transparent 65%),linear-gradient(155deg,#213f35,#112725 75%);border-color:#91c48b66}
+.character-card.rarity-epic{background:radial-gradient(ellipse at 50% 20%,#7365b14d,transparent 65%),linear-gradient(155deg,#302c4f,#14232d 75%);border-color:#b6a0ff77}
+.character-card.rarity-legendary{background:radial-gradient(ellipse at 50% 20%,#edc97633,transparent 65%),linear-gradient(155deg,#453d2e,#1b2929 75%);border-color:#e6c77c99;box-shadow:inset 0 1px 0 #ffe7ac22,0 12px 35px #0002}
+.rarity-rare .rarity-badge{color:#c2eca8;background:#a8d58a0c;border-color:#a8d58a55}
+.rarity-epic .rarity-badge{color:#d6c5ff;background:#b59aff10;border-color:#b59aff66}
+.rarity-legendary .rarity-badge{color:#ffe1a0;background:#ffe0a012;border-color:#e8c06b88}
+.rarity-rare .portrait-stage:before{background:radial-gradient(circle,#a3de8229,transparent 70%);border-color:#b5ea9619}
+.rarity-epic .portrait-stage:before{background:radial-gradient(circle,#b09aff2e,transparent 70%);border-color:#c8acff22}
+.rarity-legendary .portrait-stage:before{background:radial-gradient(circle,#ffe5a12b,transparent 70%);border-color:#ffe4a433}
+.rarity-rare .portrait-stage:after{color:#c2eca8}.rarity-epic .portrait-stage:after{color:#d6c5ff}.rarity-legendary .portrait-stage:after{color:#ffe1a0}
+.rarity-rare .cost{color:#c2eca8}.rarity-epic .cost{color:#d6c5ff}.rarity-legendary .cost{color:#ffe1a0}
+.character-card.selected{border-color:var(--lime)}
+@media(max-width:800px){.rarity-badge{min-height:26px}}
