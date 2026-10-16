@@ -1,8 +1,8 @@
 // Test-only player: chooses move/dash actions, never alters enemies, pickups or game state.
 module.exports=function(){
- let actions=0,dashes=0;const trace=[];
+ const initialLevel=level;let actions=0,dashes=0;const trace=[];
  function distances(from){const out=new Map([[from.x+','+from.y,0]]),q=[from];for(let i=0;i<q.length;i++){const p=q[i],d=out.get(p.x+','+p.y);for(const [dx,dy] of Object.values(dirs)){const x=p.x+dx,y=p.y+dy,k=x+','+y;if(open(x,y)&&!out.has(k)){out.set(k,d+1);q.push({x,y})}}}return out}
- while(level===1&&state==='playing'&&actions<6000){
+ while(level===initialLevel&&state==='playing'&&actions<6000){
   if(freeze){step();actions++;continue}
   const enemyDistances=enemies.map(distances),threat=(x,y)=>Math.min(...enemyDistances.map(d=>d.get(x+','+y)??999));
   const q=[{x:player.x,y:player.y,cost:0,first:null}],bestCost=new Map([[player.x+','+player.y,0]]);let target=null,targetCost=Infinity;
@@ -16,5 +16,5 @@ module.exports=function(){
   if(!dashCooldown&&power<5&&threat(player.x,player.y)<=3){dash();dashes++}
   step();actions++;
  }
- return {completed:level===2,actions,lives,score,coins:runCoins,remaining:pellets.size,dashes,trace};
+ return {completed:level===initialLevel+1,actions,lives,score,coins:runCoins,remaining:pellets.size,dashes,trace};
 };

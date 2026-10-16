@@ -18,8 +18,8 @@ else (()=>{
  pad.addEventListener('pointermove',e=>{if(!held.has(e.pointerId))return;e.preventDefault();const b=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-dir]');held.set(e.pointerId,b&&pad.contains(b)?b.dataset.dir:null);paint();if(b&&pad.contains(b)&&playing())move(b.dataset.dir)});
  function paint(){pad.querySelectorAll('[data-dir]').forEach(b=>b.classList.toggle('touch-active',[...held.values()].includes(b.dataset.dir)))}
  for(const event of ['pointerup','pointercancel','lostpointercapture'])pad.addEventListener(event,e=>{held.delete(e.pointerId);paint()});
- function reset(){held.clear();swipe.pointer=null;taps.clear();paint()}
- window.LumiTouchControls={reset,tick(now){if(!playing()){reset();return}if(now-previous>=90){previous=now;const d=[...held.values()].filter(Boolean).at(-1);if(d)move(d)}}};
+ function reset(){globalThis.LumiJoystickControls?.reset();held.clear();swipe.pointer=null;taps.clear();paint()}
+ window.LumiTouchControls={reset,tick(now){globalThis.LumiJoystickControls?.tick(now);if(!playing()){reset();return}if(now-previous>=90){previous=now;const d=[...held.values()].filter(Boolean).at(-1);if(d)move(d)}}};
  const bond=document.querySelector('#dash');bond.addEventListener('pointerdown',e=>{if(!playing())return;e.preventDefault();dash()});bond.onclick=e=>{if(e.detail===0)dash()};
  window.addEventListener('blur',reset);document.addEventListener('visibilitychange',reset);
  // Stop document panning only inside the active game. Dialogs and menus can still scroll.

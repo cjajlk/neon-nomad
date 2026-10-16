@@ -18,7 +18,7 @@ Pour ajouter de futurs personnages, étendre le catalogue dans `progression.js` 
 
 ## Commandes
 
-Flèches, ZQSD ou WASD ; Espace : bond ; P/Échap : pause. Sur mobile : glissement pour se déplacer, double appui sur le labyrinthe pour le bond. Son activable au menu ; synthèse audio dans le navigateur, sans fichiers audio externes.
+Flèches, ZQSD ou WASD ; Espace : bond ; P/Échap : pause. Sur mobile : joystick fixe semi-transparent à gauche ou glissement sur le plateau ; bouton Bond à droite ou double appui sur le labyrinthe. Le joystick guide les changements de direction ; Lumi conserve son déplacement automatique comme auparavant. Son activable au menu ; synthèse audio dans le navigateur, sans fichiers audio externes.
 
 ## Manettes Bluetooth et USB
 
@@ -38,11 +38,11 @@ Les commandes ont été testées avec des données de manettes simulées et l'in
 
 ## Plein écran
 
-Sur mobile, la partie tient également dans l'écran **sans activer le plein écran**. Le labyrinthe utilise la largeur disponible, sans cadre ni pad : seuls les informations essentielles et les boutons menu, plein écran et pause restent affichés. La page est immobilisée seulement pendant le gameplay. Le retour au menu rétablit le défilement.
+Sur mobile, la partie tient également dans l'écran **sans activer le plein écran**. Tous les niveaux mobiles utilisent une grille paysage de 33 × 17. Un rail gauche réserve la place du HUD et du joystick fixe ; une zone droite accueille le bouton Bond. Aucun contrôle ne couvre les cases. Chaque niveau conserve le nombre de lucioles et de fleurs de sa version PC. Les niveaux PC gardent leur grille et leur génération d'origine. La page est immobilisée seulement pendant le gameplay. Le retour au menu rétablit le défilement.
 
 Tactile : glissements courts pour changer de direction et double appui proche en moins de 320 ms pour effectuer un bond. Un glissement n'est pas compté comme un appui. Les gestes sont capturés sur le jeu pour éviter le défilement ou le zoom de la page. Les réglages ouverts peuvent toujours défiler. Les pressions actives sont libérées à l'annulation du geste et à la perte de focus. Les commandes affichées restent disponibles sur les grands écrans.
 
-Le bouton ⛶ dans l'en-tête ou au-dessus de la partie active le plein écran sur une action explicite du joueur. Le bouton SORTIR ou Échap sur PC permet d'en sortir. Le labyrinthe conserve ses proportions et adapte sa taille à la hauteur et à la largeur disponibles. Sur un écran paysage de faible hauteur, le pad se place à droite.
+Le bouton ⛶ dans l'en-tête ou au-dessus de la partie active le plein écran sur une action explicite du joueur. Le bouton SORTIR ou Échap sur PC permet d'en sortir. Le labyrinthe conserve ses proportions et adapte sa taille à la hauteur et à la largeur disponibles. En portrait mobile, un écran illustré demande de tourner le téléphone et suspend la simulation sans annuler une pause manuelle. Le retour en paysage conserve la partie.
 
 Si le navigateur refuse ou ne propose pas l'API, le mode agrandi reste disponible avec un message explicatif. Les dialogs et réglages restent accessibles. Une iframe doit autoriser le plein écran (`allowfullscreen` / `allow="fullscreen"`) ; le Hub ouvre actuellement Lumi dans un nouvel onglet.
 
