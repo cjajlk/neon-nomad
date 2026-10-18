@@ -1,0 +1,43 @@
+/* This layer applies only to menus; the landscape game layout is independent. */
+.mobile-only,#mobile-menu-nav,#mobile-menu-settings-open{display:none}
+#mobile-menu-settings{width:min(440px,calc(100% - 28px));max-height:90dvh;overflow:auto;padding:22px;border-radius:22px;border:1px solid #c9efaa55;background:linear-gradient(145deg,#233e34,#10242d);color:#f7f3e5}
+#mobile-menu-settings::backdrop{background:#041719cc}#mobile-menu-settings-close{float:right;min-height:44px}#mobile-menu-settings>.eyebrow{display:block;clear:both;padding-top:16px}#mobile-menu-settings h2{font-size:30px;margin:12px 0 22px}
+.mobile-settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mobile-settings-grid button{min-height:52px;line-height:1.6;font-size:11px}.mobile-settings-grid button:last-child{grid-column:1/-1}
+.mobile-menu-profile{display:flex;align-items:center;justify-content:center;min-height:44px;margin-top:12px;color:#c6dfbd;text-decoration:none}
+body.mobile-shell{padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(76px + env(safe-area-inset-bottom)) env(safe-area-inset-left);overflow-x:hidden}
+body.mobile-shell header{height:62px;margin:0 16px;gap:12px}body.mobile-shell header .brand{font-size:24px;gap:8px}body.mobile-shell header .brand>span{font-size:20px}body.mobile-shell header .brand small{font-size:6px;letter-spacing:1.4px}
+body.mobile-shell .header-right{gap:12px;flex-direction:row-reverse}body.mobile-shell .header-right>.fullscreen-button,body.mobile-shell #controller-status,body.mobile-shell #sound{display:none}
+body.mobile-shell #mobile-menu-settings-open{display:block;min-width:44px;min-height:44px;padding:8px;font-size:22px}
+body.mobile-shell .wallet strong{font-size:20px}body.mobile-shell .wallet span{display:none}body.mobile-shell .wallet{gap:5px}
+body.mobile-shell main{margin:12px auto 0;padding:0 14px;max-width:760px}
+body.mobile-shell[data-view=menu] footer{display:none}
+body.mobile-shell #menu{display:flex;flex-direction:column;gap:12px}
+body.mobile-shell .menu-hero{display:grid;grid-template-columns:minmax(0,1fr) 130px;grid-template-areas:'eyebrow fox' 'title fox' 'companion fox' 'modes modes' 'power power' 'play play';gap:10px 8px;min-height:0;padding:16px;border-radius:22px;background:radial-gradient(ellipse at 90% 10%,#3d6846,#142c2c 70%)}
+body.mobile-shell .menu-copy{display:contents}body.mobile-shell .menu-copy>.eyebrow{grid-area:eyebrow;font-size:8px;letter-spacing:1px;align-self:end;line-height:1.6}
+body.mobile-shell .menu-copy h1{grid-area:title;font-size:29px;letter-spacing:-1px;line-height:1.1;margin:0;align-self:center}
+body.mobile-shell .menu-copy>p,body.mobile-shell .menu-stats{display:none}
+body.mobile-shell #mobile-companion-label{display:block;grid-area:companion;color:#b4d3bc;font-size:11px;align-self:start}
+body.mobile-shell .hero-character{grid-area:fox;display:flex;justify-content:center;align-items:center;padding:0;background:none;min-width:0;min-height:0;height:145px}
+body.mobile-shell .hero-character img{width:100%;height:145px;object-fit:contain;filter:drop-shadow(0 8px 18px #03161566)}
+body.mobile-shell .hero-character>span{display:none}
+body.mobile-shell .mode-selector{grid-area:modes;margin:2px 0 0;max-width:none;gap:8px}
+body.mobile-shell .mode-selector button{padding:9px 10px;min-height:70px;border-radius:12px}
+body.mobile-shell .mode-selector strong{font-size:14px}body.mobile-shell .mode-selector small{font-size:10px;margin-top:3px}
+body.mobile-shell .mode-selector [data-mode-record]{font-size:9px;margin-top:6px}
+body.mobile-shell .mode-power-note{grid-area:power;font-size:10px;line-height:1.5;min-height:0;max-width:none;margin:0;padding-left:8px}
+body.mobile-shell #play{grid-area:play;min-width:0;width:100%;min-height:52px;padding:16px;margin:2px 0 0;font-size:14px}
+body.mobile-shell .menu-cards,body.mobile-shell .forest-menu-links,body.mobile-shell .economy-note{display:none}
+body.mobile-shell #mobile-collection-goal{display:flex;align-items:center;gap:12px;text-align:left;padding:10px 12px;width:100%;min-height:84px;border:1px solid #a9d1ae33;border-radius:18px;background:linear-gradient(120deg,#213c33,#142a2e);color:#edf3dc}
+#mobile-goal-art{object-fit:contain;flex-shrink:0}.mobile-goal-copy{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}.mobile-goal-copy small{font-size:8px;letter-spacing:1px;color:#adc7b4}.mobile-goal-copy strong{font-size:16px}.mobile-goal-copy>span:last-child{font-size:10px;color:#bfd2c2}.mobile-goal-track{height:3px;display:block;border-radius:8px;overflow:hidden;background:#081f22;margin:2px 0}.mobile-goal-track i{height:100%;display:block;background:#cceea0;border-radius:8px}
+body.mobile-shell #mobile-menu-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:6px max(10px,env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));background:#0b1e22f5;border-top:1px solid #bad6b522;box-shadow:0 -8px 25px #05161955}
+#mobile-menu-nav button{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;min-height:50px;border:0;border-radius:12px;background:none;color:#a6bdb3;font-size:10px;padding:5px}
+#mobile-menu-nav button>span{position:relative;font-size:23px;line-height:24px}#mobile-menu-nav button[aria-current=page]{color:#e1f9b2;background:#d6f5a20d}
+#mobile-daily-count{position:absolute;top:-3px;right:-12px;background:#dafa8e;color:#18332b;font:9px system-ui;font-style:normal;padding:1px 4px;min-width:14px;border-radius:10px}
+@media(max-height:600px) and (orientation:landscape){
+ body.mobile-shell{padding-bottom:calc(60px + env(safe-area-inset-bottom))}body.mobile-shell header{height:48px}body.mobile-shell main{margin:8px auto 0;max-width:1100px;padding:0 16px}body.mobile-shell #menu{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:12px;align-items:stretch}
+ body.mobile-shell .menu-hero{grid-template-columns:150px minmax(0,1fr);grid-template-areas:'fox modes' 'fox power' 'title play' 'companion play';gap:6px 14px;padding:12px;min-height:0}
+ body.mobile-shell .menu-copy>.eyebrow{display:none}body.mobile-shell .menu-copy h1{font-size:21px;line-height:1.06}body.mobile-shell .hero-character,body.mobile-shell .hero-character img{height:116px}body.mobile-shell .mode-selector button{min-height:64px;padding:7px 8px}body.mobile-shell .mode-selector small{font-size:9px}body.mobile-shell .mode-selector [data-mode-record]{margin-top:4px}body.mobile-shell #play{align-self:center;min-height:48px}body.mobile-shell #mobile-companion-label{font-size:10px}
+ body.mobile-shell #mobile-collection-goal{flex-wrap:wrap;align-content:center;justify-content:center;gap:8px;padding:12px;min-height:0}body.mobile-shell #mobile-goal-art{width:88px;height:88px}body.mobile-shell .mobile-goal-copy{flex-basis:100%;text-align:center}body.mobile-shell #mobile-collection-goal>span:last-child{display:none}
+ body.mobile-shell #mobile-menu-nav{padding-top:3px;padding-bottom:calc(3px + env(safe-area-inset-bottom))}body.mobile-shell #mobile-menu-nav button{min-height:44px;flex-direction:row;justify-content:center;gap:7px}body.mobile-shell #mobile-menu-nav button>span{font-size:20px}
+}
+@media(max-width:360px){body.mobile-shell .menu-hero{grid-template-columns:minmax(0,1fr) 108px;padding:12px}body.mobile-shell .menu-copy h1{font-size:25px}body.mobile-shell .hero-character,body.mobile-shell .hero-character img{height:128px}}

@@ -6,6 +6,8 @@ Jeu arcade original de CJAJLK Games. Site statique : déposer le dossier sur un 
 
 Accueil illustré → menu → partie. Le menu contient le refuge des renards, les défis quotidiens et les instructions. Le retour au menu depuis une partie active demande de confirmer le départ ; les Éclats déjà gagnés sont conservés.
 
+Sur téléphone, l'accueil du menu affiche le compagnon, les deux modes, Jouer et un objectif de collection compact. La barre du bas ouvre Accueil, Carte, Refuge et Défis ; une pastille signale les récompenses quotidiennes disponibles. Le bouton Réglages réunit son, plein écran, manette, joystick, aide et lien du profil Hub. Les records restent visibles dans les boutons de mode. En paysage court, Lumi occupe la gauche, les commandes le centre et l'objectif la droite. La navigation disparaît pendant une partie. Le menu PC garde sa disposition existante. Sur une très petite hauteur ou avec une taille de texte agrandie, le menu peut défiler pour garder toutes les actions accessibles.
+
 ## Progression
 
 - 10 lucioles : 1 Éclat. Le reste est conservé entre les parties.
