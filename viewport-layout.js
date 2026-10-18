@@ -1,12 +1,13 @@
 /* Geometry and DOM layout only: no game state, level, score or storage changes. */
 class LumiViewportLayout {
- static calculate(width,height,{mobile=true,ratio=630/690,joystick=false}={}){
-  const landscape=width>=height,header=mobile?0:48,sceneHeight=Math.max(1,height-header),rail=mobile?96:128,gap=8;
+ static calculate(width,height,{mobile=true,ratio=630/690,joystick=false,stickSize=88,side='left'}={}){
+  const actualStick=Math.min(stickSize,Math.max(56,height-(height<=340?202:230)));
+  const landscape=width>=height,header=mobile?0:48,sceneHeight=Math.max(1,height-header),rail=mobile?Math.max(96,actualStick+8):128,gap=8;
   const rightRail=mobile&&joystick&&landscape?64:0;
   const availableWidth=landscape?Math.max(1,width-rail-gap-rightRail-(rightRail?gap:0)):width;
   const availableHeight=landscape?sceneHeight:Math.max(1,sceneHeight-106);
   const boardWidth=Math.min(availableWidth,availableHeight*ratio),boardHeight=boardWidth/ratio;
-  return {landscape,header,sceneHeight,rail,rightRail,gap,boardWidth,boardHeight,availableWidth,availableHeight};
+  return {landscape,header,sceneHeight,rail,rightRail,gap,boardWidth,boardHeight,availableWidth,availableHeight,stickSize:actualStick,side};
  }
 }
 if(typeof module!=='undefined')module.exports=LumiViewportLayout;
@@ -17,10 +18,11 @@ else (()=>{
   const mobile=matchMedia('(max-width:800px), (pointer:coarse), (max-height:600px) and (orientation:landscape)').matches;
   const style=getComputedStyle(body),top=parseFloat(style.paddingTop)||0,bottom=parseFloat(style.paddingBottom)||0,left=parseFloat(style.paddingLeft)||0,right=parseFloat(style.paddingRight)||0;
   const width=(window.visualViewport?.width||document.documentElement.clientWidth)-left-right,height=(window.visualViewport?.height||window.innerHeight)-top-bottom;
-  const layout=LumiViewportLayout.calculate(width,height,{mobile,ratio:canvas.width/canvas.height,joystick:true});
+  const prefs=globalThis.LumiTouchPrefs?.view()||{size:88,side:'left'};
+  const layout=LumiViewportLayout.calculate(width,height,{mobile,ratio:canvas.width/canvas.height,joystick:true,stickSize:prefs.size,side:prefs.side});view.dataset.controlSide=prefs.side;view.style.setProperty('--stick-size',layout.stickSize+'px');
   view.dataset.layout=layout.landscape?'landscape':'portrait';view.dataset.device=mobile?'mobile':'desktop';body.style.setProperty('--layout-height',(height+top+bottom)+'px');
   for(const [key,value] of Object.entries({width:layout.boardWidth,height:layout.boardHeight,rail:layout.rail,scene:layout.sceneHeight,header:layout.header}))view.style.setProperty('--layout-'+key,value+'px');
   if(pauseButton.parentElement!==document.querySelector('.game-heading'))document.querySelector('.game-heading').append(pauseButton);
  })}
- window.addEventListener('lumi-board-resize',schedule);window.addEventListener('resize',schedule);window.addEventListener('orientationchange',schedule);window.visualViewport?.addEventListener('resize',schedule);for(const event of ['fullscreenchange','webkitfullscreenchange'])document.addEventListener(event,schedule);new MutationObserver(schedule).observe(body,{attributes:true,attributeFilter:['data-view']});schedule();
+ window.addEventListener('lumi-touch-settings',schedule);window.addEventListener('lumi-board-resize',schedule);window.addEventListener('resize',schedule);window.addEventListener('orientationchange',schedule);window.visualViewport?.addEventListener('resize',schedule);for(const event of ['fullscreenchange','webkitfullscreenchange'])document.addEventListener(event,schedule);new MutationObserver(schedule).observe(body,{attributes:true,attributeFilter:['data-view']});schedule();
 })();

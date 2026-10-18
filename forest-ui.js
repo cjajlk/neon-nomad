@@ -1,0 +1,19 @@
+/* World map and comfort controls, using independent local settings. */
+let journeyCycle=null;
+function renderJourney(keep=false){
+ const mode=LumiModes.choice,p=LumiJourney.view(mode),maxCycle=Math.floor((p.reached-1)/20);if(!keep||journeyCycle===null)journeyCycle=maxCycle;journeyCycle=Math.max(0,Math.min(journeyCycle,maxCycle));
+ document.querySelectorAll('[data-journey-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.journeyMode===mode)));
+ $('#journey-cycle').textContent='VOYAGE '+(journeyCycle+1);$('#journey-prev').disabled=journeyCycle===0;$('#journey-next').disabled=journeyCycle>=maxCycle;
+ const next=LumiForestWorlds.forLevel(p.cleared+1);
+ $('#journey-summary').innerHTML='<div class="journey-count"><small>CLAIRIÈRES ILLUMINÉES</small><strong>'+p.cleared+'</strong></div><div class="journey-next-objective"><img class="objective-art" src="'+next.art+'" width="1024" height="683" alt="" decoding="async"><div class="objective-copy"><small>PROCHAIN OBJECTIF</small><strong>Clairière '+(p.cleared+1)+'</strong><span>'+next.name+'</span></div></div>';
+ $('#journey-zones').innerHTML=LumiForestWorlds.zones.map((zone,i)=>{const first=journeyCycle*20+i*5+1,done=Math.max(0,Math.min(5,p.cleared-first+1));return '<article class="journey-zone world-'+zone.id+'" data-zone="'+zone.id+'"><div class="zone-art"><img class="zone-preview" src="'+zone.art+'" width="1024" height="683" alt="Décor de '+zone.name+'" loading="lazy" decoding="async"><span class="zone-range">CLAIRIÈRES '+first+' — '+(first+4)+'</span></div><div class="zone-copy"><span class="zone-completion">'+done+' / 5 ILLUMINÉES</span><h2>'+zone.name+'</h2><p>'+zone.subtitle+'</p><ol class="journey-nodes">'+Array.from({length:5},(_,j)=>{const n=first+j,status=n<=p.cleared?'done':n===p.cleared+1?'next':'locked',label=status==='done'?'Illuminée':status==='next'?'Prochain objectif':'À venir';return '<li class="journey-node '+status+'"><span aria-label="Clairière '+n+' : '+label+'">'+(status==='done'?'✦':n)+'</span><small>'+String(n).padStart(2,'0')+'</small></li>'}).join('')+'</ol></div></article>'}).join('');
+}
+function renderTouchSettings(){const p=LumiTouchPrefs.view();document.querySelectorAll('[data-stick-size]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.stickSize)===p.size)));document.querySelectorAll('[data-stick-side]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.stickSide===p.side)));$('#touch-preview').dataset.side=p.side;$('#touch-preview').style.setProperty('--preview-stick',p.size+'px');$('#touch-settings-summary').textContent='Joystick '+p.size+' px · à '+(p.side==='left'?'gauche':'droite')}
+function openTouchSettings(){if(currentView==='game'&&state==='playing')pause();globalThis.LumiTouchControls?.reset();renderTouchSettings();$('#touch-settings').showModal()}
+function updateTouchSettings(next){if(!LumiTouchPrefs.update(next))return;globalThis.LumiTouchControls?.reset();window.dispatchEvent(new Event('lumi-touch-settings'));renderTouchSettings()}
+$('#open-journey').onclick=()=>showView('journey');$('#journey-play').onclick=()=>{state='menu';showView('game');start()};
+$('#journey-prev').onclick=()=>{journeyCycle--;renderJourney(true)};$('#journey-next').onclick=()=>{journeyCycle++;renderJourney(true)};
+document.querySelectorAll('[data-journey-mode]').forEach(b=>b.onclick=()=>{LumiModes.choose(b.dataset.journeyMode);renderJourney()});
+$('#open-touch-settings').onclick=openTouchSettings;$('#game-touch-settings').onclick=openTouchSettings;$('#touch-settings-close').onclick=()=>$('#touch-settings').close();
+document.querySelectorAll('[data-stick-size]').forEach(b=>b.onclick=()=>updateTouchSettings({size:Number(b.dataset.stickSize)}));document.querySelectorAll('[data-stick-side]').forEach(b=>b.onclick=()=>updateTouchSettings({side:b.dataset.stickSide}));
+$('#touch-settings').addEventListener('close',()=>{globalThis.LumiTouchControls?.reset()});

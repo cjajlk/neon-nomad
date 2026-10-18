@@ -12,6 +12,20 @@ Accueil illustré → menu → partie. Le menu contient le refuge des renards, l
 - Clairière terminée : 25 Éclats bonus.
 - Trois défis quotidiens : lucioles, bonds et fleurs de lune. Récompenses de 30, 20 et 25 Éclats, à récupérer une seule fois par jour.
 - Lumi est disponible dès le départ. Aurore coûte 150 Éclats, Brume 300, Sylve 650, Nyx 1 200 et Astre 2 400. Les pouvoirs des compagnons sont actifs en Aventure ; Classique conserve les mêmes règles pour tous.
+- Les gardiens des forêts complètent le refuge : Flora 450, Sélène 900, Vesper 1 800 et Solstice 3 200 Éclats. Le prix reflète leur rareté visuelle et leur spécialisation, sans multiplicateur de récompenses.
+
+## Les gardiens des quatre forêts
+
+| Compagnon | Forêt | Bonus en Aventure |
+| --- | --- | --- |
+| Flora · Rare | Émeraude | Premier bond réussi de chaque clairière rechargé immédiatement. Un mur ne consomme pas ce cadeau ; perdre une vie ou mettre en pause ne le renouvelle pas. |
+| Sélène · Épique | Lunaire | Après une fleur, le prochain bond réussi se recharge en 14 pas de simulation au lieu de 28. Une seule réserve, sans cumul ; perdue après une vie perdue. |
+| Vesper · Épique | Violette | Le bond réussi et les deux pas de simulation suivants bénéficient d'une protection contre les collisions. Les murs restent infranchissables. |
+| Solstice · Légendaire | Dorée | À 20 lucioles normales restantes ou moins, recharge en 18 pas au lieu de 28. Les fleurs ne comptent pas dans ce seuil. |
+
+Le choix « En faire mon objectif » est indépendant de l'achat. Il affiche le compagnon souhaité, les Éclats disponibles, le montant manquant et un bouton pour jouer. Cet objectif apparaît au menu et dans le bilan de clairière ; il passe à un compagnon encore verrouillé après acquisition. Il est conservé sous `lumi-collection-goal-v1`, sans changer `lumi-progress-v1` ni attribuer de récompense supplémentaire. Les dix compagnons sont utilisables en Classique sans pouvoir.
+
+Les quatre nouveaux PNG transparents sont en 512 × 512, environ 350–485 Kio chacun, chargés à la demande. Les briefs exacts et leur provenance imagegen sont dans `assets/guardian-art.md`.
 - Sauvegarde locale dans `lumi-progress-v1`. Le record précédent `lumi-best` est conservé. Renouvellement des missions à minuit selon l'heure de l'appareil. Sans accès au stockage, l'interface avertit que la sauvegarde n'est valable que pour la session.
 
 Pour ajouter de futurs personnages, étendre le catalogue dans `progression.js` et leur dessin dans `game.js`. Un compte et une sauvegarde serveur seront nécessaires pour partager une progression entre appareils.
@@ -64,6 +78,18 @@ Référence : [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/
 ## Exécuter les tests
 
 Avec Node.js : `node --test tests/*.cjs`. Aucun paquet à installer. Héberger avec un serveur statique pour une sauvegarde stable ; les polices Google sont facultatives.
+
+## Forêts, carnet et confort tactile
+
+Les clairières 1–5 sont émeraude, 6–10 lunaires, 11–15 violettes et 16–20 dorées. Ce cycle visuel revient tous les vingt niveaux, sans changer les labyrinthes, ennemis, difficultés, récompenses ou règles de progression. Chaque forêt possède sa palette, ses petits décors et une séquence sonore synthétisée discrète. Le son reste désactivé par défaut et les ambiances s'arrêtent en pause ou en portrait.
+
+La carte des clairières conserve les étapes atteintes séparément en Classique et en Aventure dans `lumi-journey-v1`. Elle constitue un carnet, sans sélection libre de niveau : une nouvelle partie commence toujours au niveau 1. Les anciens scores ne permettent pas de reconstituer les niveaux auparavant terminés ; le carnet commence à enregistrer avec cette version.
+
+Une clairière terminée affiche le score gagné, les Éclats gagnés et les vies restantes. Le bonus existant de 25 Éclats est inclus et attribué une seule fois. « Continuer » reprend le niveau suivant avec le même score, les mêmes vies et les pouvoirs restants du voyage.
+
+« Confort tactile », au menu ou via ⚙ pendant une partie, propose un joystick de 76, 88 ou 104 px à gauche ou à droite. Ces préférences sont enregistrées indépendamment dans `lumi-touch-v1`. La taille se réduit si la hauteur est insuffisante. Le plateau conserve ses cases carrées et ses deux zones de commandes. Fermer les réglages laisse la partie en pause ; appuyer sur Reprendre pour continuer. Glissements et double appui restent disponibles.
+
+Les particules sont limitées à 72, utilisent leur propre générateur déterministe et respectent la préférence de réduction des animations. La carte utilise quatre illustrations originales allégées dans assets/forest-*.jpg, également reprises pour le prochain objectif. Les briefs exacts sont dans assets/forest-art.md. Aucun fichier audio supplémentaire n'est nécessaire.
 
 ## Image d'accueil
 

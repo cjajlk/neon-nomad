@@ -9,7 +9,7 @@ LumiSwipe.DoubleTap=LumiDoubleTap;
 if(typeof module!=='undefined')module.exports=LumiSwipe;
 else (()=>{
  const swipe=new LumiSwipe(),taps=new LumiDoubleTap(),pad=document.querySelector('.touchpad'),held=new Map();let previous=0;
- const playing=()=>currentView==='game'&&state==='playing'&&!orientationBlocked()&&!document.querySelector('#controller-dialog').open;
+ const playing=()=>currentView==='game'&&state==='playing'&&!orientationBlocked()&&!document.querySelector('dialog[open]')?.open;
  canvas.addEventListener('pointerdown',e=>{if(!playing()||!swipe.start(e.pointerId,e.clientX,e.clientY))return;e.preventDefault();canvas.setPointerCapture(e.pointerId)});
  canvas.addEventListener('pointermove',e=>{if(!playing())return;const d=swipe.move(e.pointerId,e.clientX,e.clientY);if(d){taps.clear();e.preventDefault();move(d)}});
  canvas.addEventListener('pointerup',e=>{const p=swipe.pointer;if(p?.id===e.pointerId&&!p.moved&&playing()&&taps.tap(e.timeStamp,e.clientX,e.clientY)){e.preventDefault();dash()}swipe.end(e.pointerId)});

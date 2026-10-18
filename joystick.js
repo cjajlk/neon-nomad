@@ -14,14 +14,14 @@ class LumiFixedJoystick {
 if(typeof module!=='undefined')module.exports=LumiFixedJoystick;
 else (()=>{
  const stick=document.querySelector('#fixed-joystick'),knob=stick.querySelector('.joystick-knob'),bond=document.querySelector('#mobile-bond'),label=bond.querySelector('small'),model=new LumiFixedJoystick();let lastRepeat=0;
- const playing=()=>currentView==='game'&&state==='playing'&&!orientationBlocked()&&!document.querySelector('#controller-dialog').open;
+ const playing=()=>currentView==='game'&&state==='playing'&&!orientationBlocked()&&!document.querySelector('dialog[open]')?.open;
  function paint(){knob.style.setProperty('--stick-x',model.x+'px');knob.style.setProperty('--stick-y',model.y+'px');stick.classList.toggle('is-held',model.pointer!==null)}
- function point(e){const r=stick.getBoundingClientRect();return [e.clientX-r.left-r.width/2,e.clientY-r.top-r.height/2]}
+ function point(e){const r=stick.getBoundingClientRect();model.radius=r.width*.318;model.deadzone=r.width*.102;return [e.clientX-r.left-r.width/2,e.clientY-r.top-r.height/2]}
  stick.addEventListener('pointerdown',e=>{if(!playing()||!model.start(e.pointerId,...point(e)))return;e.preventDefault();stick.setPointerCapture(e.pointerId);paint();if(model.direction)move(model.direction)});
  stick.addEventListener('pointermove',e=>{if(model.pointer!==e.pointerId)return;if(!playing()){reset();return}e.preventDefault();const d=model.update(e.pointerId,...point(e));paint();if(d)move(d)});
  for(const event of ['pointerup','pointercancel','lostpointercapture'])stick.addEventListener(event,e=>{model.end(e.pointerId);paint()});
  function reset(){model.reset();paint()}
  bond.addEventListener('pointerdown',e=>{if(!playing()||dashCooldown)return;e.preventDefault();dash()});bond.addEventListener('click',e=>{if(e.detail===0&&playing())dash()});
  window.LumiJoystickControls={reset,tick(now){const active=playing();if(!active)reset();if(active&&model.direction&&now-lastRepeat>=90){lastRepeat=now;move(model.direction)}bond.disabled=!active||dashCooldown>0;label.textContent=dashCooldown?Math.ceil(dashCooldown*.14)+'s':'BOND'}};
- window.addEventListener('blur',reset);document.addEventListener('visibilitychange',reset);paint();
+ window.addEventListener('lumi-touch-settings',reset);window.addEventListener('blur',reset);document.addEventListener('visibilitychange',reset);paint();
 })();
