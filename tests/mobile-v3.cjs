@@ -34,7 +34,7 @@ test('real level 1 completes with active enemies, unchanged rewards and landscap
  assert.equal(result.completed,true);assert.equal(result.lives,3);assert.equal(result.coins,49);assert.equal(run('level'),2);assert.equal(run('canvas.width'),990);assert.equal(run('canvas.height'),510);assert.equal(run('JSON.stringify(map)===JSON.stringify(LumiLevelOneMobile.create({level:2,normalCount:forest(2).join(\'\').split(\'\').filter(c=>c===\'.\').length-1}).map)'),true);
 });
 test('mobile levels 2, 3, 4, 5, 6 and 10 can be completed with active enemies',()=>{
- const bot=require('./fixtures/level-one-bot.cjs');for(const n of [2,3,4,5,6,10]){const {run}=setup(true,1);run(`level=${n};board()`);const expected=run('Math.floor([...pellets.values()].filter(v=>v===1).length/10)+25'),result=run('('+bot.toString()+')()');assert.equal(result.completed,true,'level '+n);assert.equal(run('level'),n+1);assert.equal(run('canvas.width'),990);assert.equal(result.coins,expected);assert.ok(result.lives>0)}
+ const bot=require('./fixtures/level-one-bot.cjs');for(const n of [2,3,4,5,6,10]){const {run}=setup(true,1);run(`level=${n};board()`);const expected=run('Math.floor([...pellets.values()].filter(v=>v===1).length/10)+LumiBalance.clearingBonus(level)'),result=run('('+bot.toString()+')()');assert.equal(result.completed,true,'level '+n);assert.equal(run('level'),n+1);assert.equal(run('canvas.width'),990);assert.equal(result.coins,expected);assert.ok(result.lives>0)}
 });
 test('real touch adapter steers, blocks portrait and clears partial gestures across rotation',()=>{
  const {run,sandbox,emit}=setup();run(fs.readFileSync('touch-controls.js','utf8'));

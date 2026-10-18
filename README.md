@@ -9,7 +9,7 @@ Accueil illustré → menu → partie. Le menu contient le refuge des renards, l
 ## Progression
 
 - 10 lucioles : 1 Éclat. Le reste est conservé entre les parties.
-- Clairière terminée : 25 Éclats bonus.
+- Clairière terminée : 25 Éclats au niveau 1, puis +5 par niveau, plafonné à 125 au niveau 21.
 - Trois défis quotidiens : lucioles, bonds et fleurs de lune. Récompenses de 30, 20 et 25 Éclats, à récupérer une seule fois par jour.
 - Lumi est disponible dès le départ. Aurore coûte 150 Éclats, Brume 300, Sylve 650, Nyx 1 200 et Astre 2 400. Les pouvoirs des compagnons sont actifs en Aventure ; Classique conserve les mêmes règles pour tous.
 - Les gardiens des forêts complètent le refuge : Flora 450, Sélène 900, Vesper 1 800 et Solstice 3 200 Éclats. Le prix reflète leur rareté visuelle et leur spécialisation, sans multiplicateur de récompenses.
@@ -85,7 +85,7 @@ Les clairières 1–5 sont émeraude, 6–10 lunaires, 11–15 violettes et 16�
 
 La carte des clairières conserve les étapes atteintes séparément en Classique et en Aventure dans `lumi-journey-v1`. Elle constitue un carnet, sans sélection libre de niveau : une nouvelle partie commence toujours au niveau 1. Les anciens scores ne permettent pas de reconstituer les niveaux auparavant terminés ; le carnet commence à enregistrer avec cette version.
 
-Une clairière terminée affiche le score gagné, les Éclats gagnés et les vies restantes. Le bonus existant de 25 Éclats est inclus et attribué une seule fois. « Continuer » reprend le niveau suivant avec le même score, les mêmes vies et les pouvoirs restants du voyage.
+Une clairière terminée affiche le score gagné, les Éclats gagnés et les vies restantes. Le bonus de fin, de 25 à 125 Éclats selon le niveau, est inclus et attribué une seule fois. « Continuer » reprend le niveau suivant avec le même score, les mêmes vies et les pouvoirs restants du voyage.
 
 « Confort tactile », au menu ou via ⚙ pendant une partie, propose un joystick de 76, 88 ou 104 px à gauche ou à droite. Ces préférences sont enregistrées indépendamment dans `lumi-touch-v1`. La taille se réduit si la hauteur est insuffisante. Le plateau conserve ses cases carrées et ses deux zones de commandes. Fermer les réglages laisse la partie en pause ; appuyer sur Reprendre pour continuer. Glissements et double appui restent disponibles.
 
@@ -94,3 +94,9 @@ Les particules sont limitées à 72, utilisent leur propre générateur détermi
 ## Image d'accueil
 
 `assets/lumi-accueil.png` a été créée avec l'outil intégré de génération d'images. Brief : renard orange original aux grandes oreilles, queue blanche et foulard menthe, clairière nocturne, lucioles vertes et fleurs de lune roses, illustration de jeu douce, sans texte, espace sombre à gauche pour le titre.
+
+## Équilibrage de la progression
+
+Les trois premiers niveaux gardent leur vitesse : 140, 135 et 130 ms par pas. Ensuite, le pas se réduit de 2,5 ms par niveau jusqu’à 80 ms au niveau 23. Les papillons passent progressivement de 0,5 déplacement par pas aux niveaux 1–3 à 1 au niveau 23 (+0,025 par niveau), sans le doublement brutal de l’ancien niveau 4. Un accumulateur conserve cette cadence fractionnaire, suspendu en pause et en portrait et remis à zéro à l’apparition du joueur. Les fleurs conservent leur cadence de trois pas, et le voile de Nyx la ralentit toujours de moitié.
+
+Le bonus de fin vaut `25 + 5 × (niveau − 1)`, plafonné à 125 Éclats. Il est identique dans les deux modes, versé une seule fois et affiché dans la carte et le bilan. Exemples : niveau 1, 25 ; 4, 40 ; 6, 50 ; 11, 75 ; 16, 100 ; 21 et suivants, 125. La collecte (10 lucioles = 1 Éclat), les prix, les défis et les sauvegardes existantes sont conservés.
