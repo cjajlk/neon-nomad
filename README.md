@@ -8,6 +8,8 @@ Accueil illustré → menu → partie. Le menu contient le refuge des renards, l
 
 Sur téléphone, l'accueil du menu affiche le compagnon, les deux modes, Jouer et un objectif de collection compact. La barre du bas ouvre Accueil, Carte, Refuge et Défis ; une pastille signale les récompenses quotidiennes disponibles. Le bouton Réglages réunit son, plein écran, manette, joystick, aide et lien du profil Hub. Les records restent visibles dans les boutons de mode. En paysage court, Lumi occupe la gauche, les commandes le centre et l'objectif la droite. La navigation disparaît pendant une partie. Le menu PC garde sa disposition existante. Sur une très petite hauteur ou avec une taille de texte agrandie, le menu peut défiler pour garder toutes les actions accessibles.
 
+Le refuge mobile est un album : deux compagnons par ligne en portrait, trois sur une largeur intermédiaire et quatre en paysage large. Les filtres Tous, Débloqués et À obtenir permettent de retrouver un personnage. Une vignette ouvre une fiche contenant le portrait, le pouvoir Aventure, le prix et les actions d'achat, de sélection ou d'objectif. En paysage court, les actions et le pouvoir sont placés à côté du portrait ; les textes d'ambiance restent accessibles en portrait. La fiche conserve le personnage consulté après rotation et rend le focus à sa vignette à la fermeture. L'objectif de collection reste dans un bandeau compact. Les achats utilisent toujours les règles de progression existantes, sans nouveau format de sauvegarde. La présentation détaillée PC est conservée.
+
 ## Progression
 
 - 10 lucioles : 1 Éclat. Le reste est conservé entre les parties.
